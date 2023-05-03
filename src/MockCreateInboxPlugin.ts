@@ -33,7 +33,7 @@ export class MockCreateInboxPlugin extends PolicyPlugin {
 
             this.logger.info(`create inbox for ${origin}`);
 
-            const url  = policy.args['https://www.w3.org/ns/ldp#inbox']?.value;
+            const url  = policy.args['http://www.w3.org/ns/ldp#inbox']?.value;
 
             if (url === undefined) {
                 this.logger.error(`no ldp:inbox in the policy`);

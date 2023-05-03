@@ -25,9 +25,9 @@
     # Extract the graph from the ParsedCitationDocument .
     ?object log:semantics ?citationGraph . 
 
-    # The citation graph should contains a mentions
+    # The citation graph should contains a bibo:cites
     ?citationGraph log:includes {
-        ?publication bibo:mentions ?citation .
+        ?publication bibo:cites ?citation .
     } .
 
     # Create an output directory for the parsed data
@@ -45,7 +45,7 @@
         a fno:Execution ;
         fno:executes ex:inboxLocator ;
         ex:subject ?publication ;
-        ex:predicate bibo:mentions ;
+        ex:predicate bibo:cites ;
         ex:object ?citation 
     ] .
 

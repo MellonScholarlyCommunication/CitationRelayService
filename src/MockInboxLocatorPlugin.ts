@@ -53,7 +53,7 @@ export class MockInboxLocatorPlugin extends PolicyPlugin {
 
             mainStore.addQuad(
                     N3.DataFactory.namedNode(object),
-                    N3.DataFactory.namedNode('https://www.w3.org/ns/ldp#inbox'),
+                    N3.DataFactory.namedNode('http://www.w3.org/ns/ldp#inbox'),
                     N3.DataFactory.namedNode(inboxValue),
                     N3.DataFactory.defaultGraph()
             );
