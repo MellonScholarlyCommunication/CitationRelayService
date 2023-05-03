@@ -1,0 +1,42 @@
+{
+    "@context": [
+      "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^5.0.0/components/context.jsonld",
+      "https://linkedsoftwaredependencies.org/bundles/npm/koreografeye/^0.0.0/components/context.jsonld",
+      "https://linkedsoftwaredependencies.org/bundles/npm/citation-relay-service/^0.0.0/components/context.jsonld"
+    ],
+    "@graph": [
+      {
+        "@id": "urn:koreografeye:reasonerInstance",
+        "@type": "EyeReasoner",
+        "eye": "/usr/local/bin/eye",
+        "args": [ 
+          "--quiet" , 
+          "--nope" , 
+          "--pass"
+        ]
+      },
+      {
+        "@id": "http://example.org/sendNotification",
+        "@type": "SendNotificationPlugin",
+        "context": [
+            "https://www.w3.org/ns/activitystreams" ,
+            "https://purl.org/coar/notify"
+        ]
+      },
+      {
+        "@id": "http://example.org/serializeAs",
+        "@type": "SerializeAsPlugin"
+      },
+      {
+        "@id": "http://example.org/inboxCreator",
+        "@type": "MockCreateInboxPlugin",
+        "fakeBaseUrl": "http://localhost:3000/experiment",
+        "solidPath": "solid/experiment"
+      },
+      {
+        "@id": "http://example.org/inboxLocator",
+        "@type": "MockInboxLocatorPlugin",
+        "fakeBaseUrl": "http://localhost:3000/experiment"
+      }
+    ]
+}

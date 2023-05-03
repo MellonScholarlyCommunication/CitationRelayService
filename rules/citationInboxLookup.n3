@@ -1,0 +1,58 @@
+@prefix ex:   <http://example.org/> .
+@prefix as:   <https://www.w3.org/ns/activitystreams#> .
+@prefix sorg: <https://schema.org/>.
+@prefix pol:  <https://www.example.org/ns/policy#> .
+@prefix fno:  <https://w3id.org/function/ontology#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+{
+    # We need an as:Offer...
+    ?id a as:Offer .
+    
+    # ... of type ex:CitationExtraction
+    ?id a ex:CitationRelay .
+
+    # ...which contains a object
+    ?id as:object ?object .
+
+    # ...of type ParsedCitationDocument
+    ?object a ex:ParsedCitationDocument .
+
+    # Extract the graph from the ParsedCitationDocument .
+    ?object log:semantics ?citationGraph . 
+
+    # The citation graph should contains a mentions
+    ?citationGraph log:includes {
+        ?publication bibo:mentions ?citation .
+    } .
+
+    # Create an output directory for the parsed data
+    ?id log:uuid ?uuid .
+    ( "in/" ?uuid ".ttl") string:concatenation ?outPath .
+    ?outUrl log:uri ?outPath .
+}
+=>
+{
+    # When the conditions above hold, the I want a policy executed
+    # to relay the citations
+
+    # Locate the inboxes for the bibo:mention
+    ex:MyMentionInboxLocator pol:policy [
+        a fno:Execution ;
+        fno:executes ex:inboxLocator ;
+        ex:subject ?publication ;
+        ex:predicate bibo:mentions ;
+        ex:object ?citation 
+    ] .
+
+    # Write the main store to a file
+    ex:MyWriteMainStore pol:policy [
+        a fno:Execution ;
+        fno:executes ex:serializeAs ;
+        ex:path ?outUrl 
+    ]
+}.

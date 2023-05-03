@@ -1,0 +1,65 @@
+@prefix ex:   <http://example.org/> .
+@prefix as:   <https://www.w3.org/ns/activitystreams#> .
+@prefix sorg: <https://schema.org/>.
+@prefix pol:  <https://www.example.org/ns/policy#> .
+@prefix fno:  <https://w3id.org/function/ontology#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+@prefix log:  <http://www.w3.org/2000/10/swap/log#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix ldp:  <https://www.w3.org/ns/ldp#> .
+
+{
+    # We need an Offer notification
+    ?id a as:Offer .
+    # ... of type ex:CitationExtraction
+    ?id a ex:CitationRelay .
+
+    # ...which contains a object
+    ?id as:object ?object .
+
+    # ...of type ParsedCitationDocument
+    ?object a ex:ParsedCitationDocument .
+    
+    # We also need mentions
+    ?artifact bibo:mentions ?cited_artifact .
+
+    # This cited_artifact should have an inbox
+    ?cited_artifact ldp:inbox ?inbox .
+}
+=>
+{
+    # When the conditions above hold, the I want a policy executed
+    # that sends out a LDN notification to the inbox
+
+    # First create a mock inbox for our experimental network
+    :MyCreateInbox pol:policy [
+        a fno:Execution ;
+        fno:executes ex:inboxCreator ;
+        ldp:inbox ?inbox 
+    ] .
+
+    :MyAnswerPolicy pol:policy [
+        a fno:Execution ;
+        fno:executes ex:sendNotification ;
+        ex:to ?inbox ;
+        ex:notification [
+                a as:Announce , ex:Citation ;
+                as:actor     <http://localhost:3000/ces-relay/profile/card#me> ;
+                as:origin    <https://github.com/MellonScholarlyCommunication/CitationExtractorService/profile/card#me> ;
+                as:context   ?cited_artifact ;
+                as:object    ?object
+        ]
+    ] .
+} .
+
+# Some metadata about the actors involved in this communication
+
+<http://localhost:3000/ces-relay/profile/card#me> 
+    a as:Service ;
+    as:name "Citation Relay Service" ;
+    ldp:inbox <http://localhost:3000/ces-relay/inbox/> .
+
+<https://github.com/MellonScholarlyCommunication/CitationExtractorService/profile/card#me> 
+    a as:Service ;
+    as:name "Mellon Citation Extractor Service Server" .

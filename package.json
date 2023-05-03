@@ -1,0 +1,54 @@
+{
+  "name": "citation-relay-service",
+  "version": "0.0.1",
+  "description": "A citation relay service node",
+  "lsd:module": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "components",
+    "dist/**/*.d.ts",
+    "dist/**/*.js",
+    "dist/**/*.js.map"
+  ],
+  "scripts": {
+    "build": "yarn build:ts && yarn build:components",
+    "build:ts": "tsc",
+    "build:components": "componentsjs-generator -s dist -r citrel218",
+    "prepare": "yarn build",
+    "solid": "./bin/solid.sh",
+    "watch": "bin/watch.sh http://localhost:3000/ces-relay/inbox/",
+    "extract:prepare": "npx orch --keep --info --in pre-ingest --out pre rules/citationInboxLookup.n3",
+    "extract:run": "npx pol --info --in pre",
+    "send:prepare": "npx orch --info --in in --out out rules/announceCitations.n3",
+    "send:run": "npx pol --info --in out",
+    "clean": "rm pre/*",
+    "clean:real": "rm pre/* ; rm in/* ; rm out/*"
+  },
+  "keywords": [
+    "oai-pmh",
+    "event",
+    "notifications",
+    "ldn"
+  ],
+  "author": "Patrick Hochstenbach <Patrick.Hochstenbach@UGent.be>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jsonld": "^1.5.8",
+    "@types/n3": "^1.10.4",
+    "@types/parse-link-header": "^2.0.1",
+    "componentsjs-generator": "^3.1.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.7",
+    "componentsjs": "^5.3.2",
+    "koreografeye": "^0.2.7",
+    "n3": "^1.16.4",
+    "parse-link-header": "^2.0.0",
+    "solid-bashlib": "^0.3.4",
+    "uuid": "^9.0.0",
+    "xmldom": "^0.6.0",
+    "xpath": "^0.0.32"
+  }
+}
