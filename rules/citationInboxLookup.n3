@@ -44,7 +44,9 @@
     # to relay the citations
 
     # Locate the inboxes for the bibo:mention
-    ex:MyMentionInboxLocator pol:policy [
+    # TODO: temporary fix, use the citationId to create for every citation
+    # a new inboxLocator policy
+    ?citationId pol:policy [
         a fno:Execution ;
         fno:executes ex:inboxLocator ;
         ex:subject ?publication ;
