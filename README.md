@@ -103,7 +103,7 @@ Definition of all orchestration and policy execution plugins that will be used.
 
 A N3 rule file that requests:
 
-- For every bibo:mention|citation in the parsed citation document an LDN Inbox location lookup
+- For every citation in the parsed citation document an LDN Inbox location lookup
 
 ### rules/announceCitations
 

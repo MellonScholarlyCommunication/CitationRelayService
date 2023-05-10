@@ -6,7 +6,7 @@
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
 @prefix list: <http://www.w3.org/2000/10/swap/list#> .
-@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cito: <http://purl.org/spar/cito/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 {
@@ -27,7 +27,9 @@
 
     # The citation graph should contains a bibo:cites
     ?citationGraph log:includes {
-        ?publication bibo:cites ?citation .
+        ?citationId 
+            cito:hasCitingEntity ?publicaton ;
+            cito:hasCitedEntity ?citation .
     } .
 
     # Create an output directory for the parsed data

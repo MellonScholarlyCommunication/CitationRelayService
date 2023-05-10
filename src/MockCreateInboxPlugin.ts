@@ -6,8 +6,7 @@ import {
 } from 'koreografeye';
 
 /**
- * A mock citation extractor that generates fake bibo:mention and bibo:cites.
- * The fake citations will be added to the main store.
+ * A mock creator of Inboxes
  */
 export class MockCreateInboxPlugin extends PolicyPlugin {
     fakeBaseUrl : string;
