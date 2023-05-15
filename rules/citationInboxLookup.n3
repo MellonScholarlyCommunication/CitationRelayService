@@ -6,6 +6,7 @@
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
 @prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix crypto: <http://www.w3.org/2000/10/swap/crypto#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix cito: <http://purl.org/spar/cito/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -35,8 +36,9 @@
     } .
 
     # Create an output directory for the parsed data
-    ?id log:uuid ?uuid .
-    ( "in/" ?uuid ".ttl") string:concatenation ?outPath .
+    ?id log:uri ?ids .
+    ?ids crypto:md5 ?genid .
+    ( "in/" ?genid ".ttl") string:concatenation ?outPath .
     ?outUrl log:uri ?outPath .
 }
 =>
@@ -45,13 +47,13 @@
     # to relay the citations
 
     # Locate the inboxes for the bibo:mention
-    ex:MyMentionInboxLocator pol:policy ex:MyMentionInboxLocatorPolicy .
-    ex:MyMentionInboxLocatorPolicy  
+    ?citationId pol:policy [
         a fno:Execution ;
         fno:executes ex:inboxLocator ;
         ex:subject ?publication ;
         ex:predicate bibo:cites ;
-        ex:object ?citation .
+        ex:object ?citation 
+    ] .
 
     # Write the main store to a file
     ex:MyWriteMainStore pol:policy  ex:MyWriteMainStorePolicy .

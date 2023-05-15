@@ -27,6 +27,10 @@
 
     # This cited_artifact should have an inbox
     ?cited_artifact ldp:inbox ?inbox .
+
+    # Create unique ids for the policies
+    ?inbox log:skolem ?inboxid .
+    ?inboxid log:skolem ?answerid .
 }
 =>
 {
@@ -34,14 +38,13 @@
     # that sends out a LDN notification to the inbox
 
     # First create a mock inbox for our experimental network
-    ex:MyCreateInbox pol:policy ex:MyCreateInboxPolicy .
-    ex:MyCreateInboxPolicy 
+    ?inboxid pol:policy [
         a fno:Execution ;
         fno:executes ex:inboxCreator ;
-        ldp:inbox ?inbox .
+        ldp:inbox ?inbox 
+    ] .
 
-    ex:MyAnswer pol:policy ex:MyAnswerPolicy .
-    ex:MyAnswerPolicy
+    ?answerid pol:policy [
         a fno:Execution ;
         sh:order 1000 ;
         fno:executes ex:sendNotification ;
@@ -52,7 +55,8 @@
                 as:origin    <https://github.com/MellonScholarlyCommunication/CitationExtractorService/profile/card#me> ;
                 as:context   ?cited_artifact ;
                 as:object    ?object
-        ] .
+        ] 
+    ] .
 } .
 
 # Some metadata about the actors involved in this communication
