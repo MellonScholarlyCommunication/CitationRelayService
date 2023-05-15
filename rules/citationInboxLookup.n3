@@ -9,6 +9,7 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix cito: <http://purl.org/spar/cito/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
 
 {
     # We need an as:Offer...
@@ -44,18 +45,19 @@
     # to relay the citations
 
     # Locate the inboxes for the bibo:mention
-    ex:MyMentionInboxLocator pol:policy [
+    ex:MyMentionInboxLocator pol:policy ex:MyMentionInboxLocatorPolicy .
+    ex:MyMentionInboxLocatorPolicy  
         a fno:Execution ;
         fno:executes ex:inboxLocator ;
         ex:subject ?publication ;
         ex:predicate bibo:cites ;
-        ex:object ?citation 
-    ] .
+        ex:object ?citation .
 
     # Write the main store to a file
-    ex:MyWriteMainStore pol:policy [
+    ex:MyWriteMainStore pol:policy  ex:MyWriteMainStorePolicy .
+    ex:MyWriteMainStorePolicy 
         a fno:Execution ;
+        sh:order 1000 ;
         fno:executes ex:serializeAs ;
-        ex:path ?outUrl 
-    ]
+        ex:path ?outUrl .
 }.

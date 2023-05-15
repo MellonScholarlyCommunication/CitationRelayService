@@ -8,6 +8,7 @@
 @prefix list: <http://www.w3.org/2000/10/swap/list#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix ldp:  <http://www.w3.org/ns/ldp#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
 
 {
     # We need an Offer notification
@@ -33,14 +34,16 @@
     # that sends out a LDN notification to the inbox
 
     # First create a mock inbox for our experimental network
-    :MyCreateInbox pol:policy [
+    ex:MyCreateInbox pol:policy ex:MyCreateInboxPolicy .
+    ex:MyCreateInboxPolicy 
         a fno:Execution ;
         fno:executes ex:inboxCreator ;
-        ldp:inbox ?inbox 
-    ] .
+        ldp:inbox ?inbox .
 
-    :MyAnswerPolicy pol:policy [
+    ex:MyAnswer pol:policy ex:MyAnswerPolicy .
+    ex:MyAnswerPolicy
         a fno:Execution ;
+        sh:order 1000 ;
         fno:executes ex:sendNotification ;
         ex:to ?inbox ;
         ex:notification [
@@ -49,8 +52,7 @@
                 as:origin    <https://github.com/MellonScholarlyCommunication/CitationExtractorService/profile/card#me> ;
                 as:context   ?cited_artifact ;
                 as:object    ?object
-        ]
-    ] .
+        ] .
 } .
 
 # Some metadata about the actors involved in this communication
