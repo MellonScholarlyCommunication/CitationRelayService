@@ -51,7 +51,7 @@
     # to relay the citations
 
     ?storeUpdateId pol:policy [
-        a fno:Execution 
+        a fno:Execution ;
         fno:executes ex:storeUpdate ;
         ex:subject ?publication ;
         ex:predicate bibo:cites ;
