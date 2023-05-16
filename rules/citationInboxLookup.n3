@@ -31,7 +31,7 @@
     # The citation graph should contains a bibo:cites
     ?citationGraph log:includes {
         ?citationId 
-            cito:hasCitingEntity ?publicaton ;
+            cito:hasCitingEntity ?publication ;
             cito:hasCitedEntity ?citation .
     } .
 
@@ -40,16 +40,26 @@
     ?ids crypto:md5 ?genid .
     ( "in/" ?genid ".ttl") string:concatenation ?outPath .
     ?outUrl log:uri ?outPath .
+
+    # Create two unique id for each citation
+    ?citationId log:skolem ?storeUpdateId .
+    ?inboxLocatorId log:skolem ?inboxLocatorId .
 }
 =>
 {
     # When the conditions above hold, the I want a policy executed
     # to relay the citations
 
-    ?publication bibo:cites ?citation .
+    ?storeUpdateId pol:policy [
+        a fno:Execution 
+        fno:executes ex:storeUpdate ;
+        ex:subject ?publication ;
+        ex:predicate bibo:cites ;
+        ex:object ?citation 
+    ] .
     
     # Locate the inboxes for the bibo:mention
-    ?citationId pol:policy [
+    ?inboxLocatorId pol:policy [
         a fno:Execution ;
         fno:executes ex:inboxLocator ;
         ex:object ?citation 

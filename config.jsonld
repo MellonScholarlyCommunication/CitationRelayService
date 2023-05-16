@@ -37,6 +37,10 @@
         "@id": "http://example.org/inboxLocator",
         "@type": "MockInboxLocatorPlugin",
         "fakeBaseUrl": "http://localhost:3000/experiment"
+      },
+      {
+        "@id": "http://example.org/storeUpdate",
+        "@type": "StoreUpdatePlugin"
       }
     ]
 }

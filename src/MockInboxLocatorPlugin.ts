@@ -19,10 +19,6 @@ export class MockInboxLocatorPlugin extends PolicyPlugin {
         this.fakeBaseUrl = fakeBaseUrl;
     }
 
-    /**
-     * Required policy parameter ex:predicate (the predicate that points to a resource
-     * to discover the LDN inbox for).
-     */
     public async execute (mainStore: N3.Store, _policyStore: N3.Store, policy: IPolicyType) : Promise<boolean> {
 
         return new Promise<boolean>( async (resolve,_) => {
