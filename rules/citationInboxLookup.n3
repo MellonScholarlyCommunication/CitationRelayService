@@ -43,7 +43,7 @@
 
     # Create two unique id for each citation
     ?citationId log:skolem ?storeUpdateId .
-    ?inboxLocatorId log:skolem ?inboxLocatorId .
+    ?storeUpdateId log:skolem ?inboxLocatorId .
 }
 =>
 {
