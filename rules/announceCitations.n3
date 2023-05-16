@@ -30,7 +30,9 @@
 
     # Create unique ids for the policies
     ?inbox log:skolem ?inboxid .
-    ?inboxid log:skolem ?answerid .
+
+    # Create unqiue ids for each cited_artifact
+    ?cited_artifact log:skolem ?answerid .
 }
 =>
 {

@@ -46,12 +46,12 @@
     # When the conditions above hold, the I want a policy executed
     # to relay the citations
 
+    ?publication bibo:cites ?citation .
+    
     # Locate the inboxes for the bibo:mention
     ?citationId pol:policy [
         a fno:Execution ;
         fno:executes ex:inboxLocator ;
-        ex:subject ?publication ;
-        ex:predicate bibo:cites ;
         ex:object ?citation 
     ] .
 

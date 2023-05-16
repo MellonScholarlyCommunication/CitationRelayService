@@ -26,14 +26,10 @@ export class MockInboxLocatorPlugin extends PolicyPlugin {
     public async execute (mainStore: N3.Store, _policyStore: N3.Store, policy: IPolicyType) : Promise<boolean> {
 
         return new Promise<boolean>( async (resolve,_) => {
-            const subject   = policy.args['http://example.org/subject']?.value;
-            const predicate = policy.args['http://example.org/predicate']?.value;
             const object    = policy.args['http://example.org/object']?.value;
 
-            if (subject === undefined ||
-                predicate === undefined ||
-                object === undefined) {
-                this.logger.error(`no subject, predicate or object in policy`);
+            if (object === undefined) {
+                this.logger.error(`no object in policy`);
                 resolve(false);
                 return;
             }
@@ -43,13 +39,6 @@ export class MockInboxLocatorPlugin extends PolicyPlugin {
             this.logger.info(`${object} has inbox ${inboxValue}`);
 
             this.logger.debug(`adding the inbox to the main store`);
-
-            mainStore.addQuad(
-                N3.DataFactory.namedNode(subject),
-                N3.DataFactory.namedNode(predicate),
-                N3.DataFactory.namedNode(object),
-                N3.DataFactory.defaultGraph()
-            );
 
             mainStore.addQuad(
                     N3.DataFactory.namedNode(object),
