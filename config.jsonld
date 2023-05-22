@@ -29,9 +29,7 @@
       },
       {
         "@id": "http://example.org/inboxCreator",
-        "@type": "MockCreateInboxPlugin",
-        "fakeBaseUrl": "http://localhost:3000/experiment",
-        "solidPath": "solid/experiment"
+        "@type": "NullPlugin"
       },
       {
         "@id": "http://example.org/inboxLocator",

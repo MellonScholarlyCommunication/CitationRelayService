@@ -6,9 +6,9 @@ import {
 } from 'koreografeye';
 
 /**
- * A mock creator of Inboxes
+ * A creator of Inboxes on some path
  */
-export class MockCreateInboxPlugin extends PolicyPlugin {
+export class CreateInboxPlugin extends PolicyPlugin {
     fakeBaseUrl : string;
     solidPath : string;
 
