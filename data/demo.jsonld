@@ -1,0 +1,40 @@
+{
+   "target" : {
+      "id" : "http://n062-07.wall2.ilabt.iminds.be:3002/profile/card#me",
+      "name" : "Citation Extraction Service",
+      "https://www.w3.org/ns/ldp#inbox" : {
+         "id" : "http://n062-07.wall2.ilabt.iminds.be:3002/inbox/"
+      },
+      "type" : "Service"
+   },
+   "actor" : {
+      "https://www.w3.org/ns/ldp#inbox" : {
+         "id" : "http://n062-07.wall2.ilabt.iminds.be:3000/inbox/"
+      },
+      "name" : "Ghent University Academic Bibliography",
+      "id" : "https://biblio.ugent.be/profile/card#me",
+      "type" : "Service"
+   },
+   "type" : [
+      "Offer",
+      "http://example.org/CitationRelay"
+   ],
+   "origin" : {
+      "type" : "Service",
+      "name" : "OAI-Bridge Demo Service",
+      "id" : "https://github.com/MellonScholarlyCommunication/OAI-Bridge/profile/card#me"
+   },
+   "id" : "urn:uuid:893ae89f-33f0-4c1a-8f94-7f4e4d27a69e",
+   "object" : {
+      "id" : "http://localhost:8080/demo.ttl",
+      "type" : [
+         "Document",
+         "http://example.org/ServiceResult",
+         "http://example.org/ParsedCitationDocument"
+      ]
+   },
+   "@context" : [
+      "https://www.w3.org/ns/activitystreams",
+      "https://purl.org/coar/notify"
+   ]
+}

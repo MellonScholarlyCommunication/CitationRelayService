@@ -1,6 +1,6 @@
 .DS_Store
 componentsjs-error-state.json
-pre-ingest/**
+pre-in/**
 pre/**
 in/**
 err/**
@@ -11,4 +11,3 @@ components/**
 node_modules/**
 biblio.db
 cache.db
-data/*

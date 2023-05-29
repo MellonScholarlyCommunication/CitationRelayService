@@ -18,6 +18,8 @@ export class InboxLocatorPlugin extends PolicyPlugin {
     public async execute (mainStore: N3.Store, _policyStore: N3.Store, policy: IPolicyType) : Promise<boolean> {
 
         return new Promise<boolean>( async (resolve,_) => {
+            this.logger.log(`starting InboxLocatorPlugin`);
+
             const object    = policy.args['http://example.org/object']?.value;
 
             if (object === undefined) {
@@ -39,12 +41,12 @@ export class InboxLocatorPlugin extends PolicyPlugin {
                         N3.DataFactory.namedNode(inboxValue),
                         N3.DataFactory.defaultGraph()
                 );
+                resolve(true);
             }
             else {
                 this.logger.info(`no inbox for ${object}`);
+                resolve(false);
             }
-
-            resolve(true);
         });
     }
 
@@ -64,7 +66,7 @@ export class InboxLocatorPlugin extends PolicyPlugin {
                 this.logger.debug(`linked headers ${resource} : ${linkHeaders}`);
 
                 if (linkHeaders === null) {
-                    this.logger.debug(`${resource} does not have link headers`);
+                    this.logger.info(`${resource} does not have link headers`);
                     resolve(null);
                     return;
                 }
@@ -72,18 +74,18 @@ export class InboxLocatorPlugin extends PolicyPlugin {
                 const parsedLinkHeaders = parseLinkHeader(linkHeaders);
 
                 if (parsedLinkHeaders == null) {
-                    this.logger.debug(`${resource} failed to parse link headers`);
+                    this.logger.info(`${resource} failed to parse link headers`);
                     resolve(null);
                     return;
                 }
 
                 if (parsedLinkHeaders['http://www.w3.org/ns/ldp#inbox']) {
                     const inbox = parsedLinkHeaders['http://www.w3.org/ns/ldp#inbox']['url'];
-                    this.logger.info(`${resource} inbox : ${inbox}`);
+                    this.logger.info(`${resource} HEAD has inbox ${inbox}`);
                     resolve(inbox);
                 }
                 else {
-                    this.logger.info(`${resolve} has no http://www.w3.org/ns/ldp#inbox`);
+                    this.logger.info(`${resource} HEAD has no http://www.w3.org/ns/ldp#inbox`);
                     resolve(null);
                     return;
                 }

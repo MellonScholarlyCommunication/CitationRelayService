@@ -28,6 +28,8 @@ export class CreateInboxPlugin extends PolicyPlugin {
     public async execute (_mainStore: N3.Store, _policyStore: N3.Store, policy: IPolicyType) : Promise<boolean> {
 
         return new Promise<boolean>( (resolve,_) => {
+            this.logger.log(`starting CreateInboxPlugin`);
+            
             const origin = policy.origin;
 
             this.logger.info(`create inbox for ${origin}`);

@@ -22,6 +22,8 @@ export class FixedInboxLocatorPlugin extends PolicyPlugin {
     public async execute (mainStore: N3.Store, _policyStore: N3.Store, policy: IPolicyType) : Promise<boolean> {
 
         return new Promise<boolean>( async (resolve,_) => {
+            this.logger.log(`starting FixedInboxLocatorPlugin`);
+
             const object    = policy.args['http://example.org/object']?.value;
 
             if (object === undefined) {

@@ -16,9 +16,10 @@
     "build:ts": "tsc",
     "build:components": "componentsjs-generator -s dist -r citrel218",
     "prepare": "yarn build",
-    "solid": "./bin/solid.sh",
+    "server": "cd data ; npx http-server",
     "watch": "bin/watch.sh http://localhost:3000/ces-relay/inbox/",
-    "extract:prepare": "npx orch --keep --info --in pre-ingest --out pre rules/citationInboxLookup.n3",
+    "watch:demo": "cp data/demo.jsonld pre-in",
+    "extract:prepare": "npx orch --keep --info --in pre-in --out pre rules/citationInboxLookup.n3",
     "extract:run": "npx pol --info --in pre",
     "send:prepare": "npx orch --info --in in --out out rules/announceCitations.n3",
     "send:run": "npx pol --info --in out",
@@ -38,6 +39,7 @@
     "@types/n3": "^1.10.4",
     "@types/parse-link-header": "^2.0.1",
     "componentsjs-generator": "^3.1.0",
+    "http-server": "^14.1.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {

@@ -5,3 +5,4 @@ export * from './CreateInboxPlugin';
 export * from './NullPlugin';
 export * from './SerializeAsPlugin';
 export * from './StoreUpdatePlugin';
+export * from './WaterfallPlugin';
