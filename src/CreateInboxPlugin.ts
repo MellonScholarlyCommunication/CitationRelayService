@@ -30,11 +30,7 @@ export class CreateInboxPlugin extends PolicyPlugin {
         return new Promise<boolean>( (resolve,_) => {
             this.logger.log(`starting CreateInboxPlugin`);
             
-            const origin = policy.origin;
-
-            this.logger.info(`create inbox for ${origin}`);
-
-            const url  = policy.args['http://www.w3.org/ns/ldp#inbox']?.value;
+            const url  = policy.args['http://www.w3.org/ns/ldp#inbox'];
 
             if (url === undefined) {
                 this.logger.error(`no ldp:inbox in the policy`);
@@ -42,7 +38,7 @@ export class CreateInboxPlugin extends PolicyPlugin {
                 return;
             }
 
-            const file = url.replace(this.fakeBaseUrl,"").replace('/','');
+            const file = url[0].value.replace(this.fakeBaseUrl,"").replace('/','');
             const dir  = `${this.solidPath}/${file}`;
 
             this.logger.info(`creating for ${url} inbox ${dir}}`);

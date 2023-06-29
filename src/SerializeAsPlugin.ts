@@ -19,7 +19,7 @@ export class SerializeAsPlugin extends PolicyPlugin {
         return new Promise<boolean>( async (resolve,_) => {
             this.logger.log(`starting SerializeAsPlugin`);
             
-            const path  = policy.args['http://example.org/path']?.value.replace(/^file:\/\/\//,"");
+            const path  = policy.args['http://example.org/path'];
 
             if (path === undefined) {
                 this.logger.error(`no path in the policy`);
@@ -27,15 +27,17 @@ export class SerializeAsPlugin extends PolicyPlugin {
                 return;
             }
 
-            this.logger.info(`writing main store to ${path}`);
+            const thePath = path[0].value.replace(/^file:\/\/\//,"");
+
+            this.logger.info(`writing main store to ${thePath}`);
 
             try {
                 const rdf = await rdfTransformStore(mainStore, "text/turtle");
 
-                fs.writeFileSync(path,rdf);
+                fs.writeFileSync(thePath,rdf);
             }
             catch (e) {
-                this.logger.error(`failed to write to ${path}`);
+                this.logger.error(`failed to write to ${thePath}`);
                 resolve(false);
                 return;
             }

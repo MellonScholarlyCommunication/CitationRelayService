@@ -24,7 +24,7 @@ export class FixedInboxLocatorPlugin extends PolicyPlugin {
         return new Promise<boolean>( async (resolve,_) => {
             this.logger.log(`starting FixedInboxLocatorPlugin`);
 
-            const object    = policy.args['http://example.org/object']?.value;
+            const object    = policy.args['http://example.org/object'];
 
             if (object === undefined) {
                 this.logger.error(`no object in policy`);
@@ -32,12 +32,12 @@ export class FixedInboxLocatorPlugin extends PolicyPlugin {
                 return;
             }
 
-            this.logger.info(`${object} has inbox ${this.fakeBaseUrl}`);
+            this.logger.info(`${object[0].value} has inbox ${this.fakeBaseUrl}`);
 
             this.logger.debug(`adding the inbox to the main store`);
 
             mainStore.addQuad(
-                    N3.DataFactory.namedNode(object),
+                    N3.DataFactory.namedNode(object[0].value),
                     N3.DataFactory.namedNode('http://www.w3.org/ns/ldp#inbox'),
                     N3.DataFactory.namedNode(this.fakeBaseUrl),
                     N3.DataFactory.defaultGraph()

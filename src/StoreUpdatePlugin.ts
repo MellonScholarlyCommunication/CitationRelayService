@@ -14,9 +14,9 @@ export class StoreUpdatePlugin extends PolicyPlugin {
         return new Promise<boolean>( async (resolve,_) => {
             this.logger.log(`starting StoreUpdatePlugin`);
             
-            const subject   = policy.args['http://example.org/subject']?.value;
-            const predicate = policy.args['http://example.org/predicate']?.value;
-            const object    = policy.args['http://example.org/object']?.value;
+            const subject   = policy.args['http://example.org/subject']?.[0].value;
+            const predicate = policy.args['http://example.org/predicate']?.[0].value;
+            const object    = policy.args['http://example.org/object']?.[0].value;
 
             if (subject === undefined ||
                 predicate === undefined ||
