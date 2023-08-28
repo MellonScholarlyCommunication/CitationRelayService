@@ -1,0 +1,15 @@
+<http://example.org/a> <http://example.org/b> <http://example.org/c>.
+_:b1_e_n3_MINUS_0_1 <https://www.example.org/ns/policy#mainSubject> <http://example.org/a>.
+_:b1_e_n3_MINUS_1_1 <https://www.example.org/ns/policy#origin> <file:///var/folders/g8/czx2gjfs3_bbvvk1hjlcsj9m0000gn/T/data/test.ttl>.
+<http://example.org/MyUpdateStore> <https://www.example.org/ns/policy#policy> _:b1_sk_0.
+_:b1_sk_0 a <https://w3id.org/function/ontology#Execution>;
+    <https://w3id.org/function/ontology#executes> <http://example.org/storeUpdate>;
+    <http://example.org/subject> <http://example.org/x>;
+    <http://example.org/predicate> <http://example.org/y>;
+    <http://example.org/object> <http://example.org/z>.
+<http://example.org/MyWriteMainStore> <https://www.example.org/ns/policy#policy> _:b1_sk_1.
+_:b1_sk_1 a <https://w3id.org/function/ontology#Execution>;
+    <https://w3id.org/function/ontology#executes> <http://example.org/serializeAs>;
+    <http://www.w3.org/ns/shacl#order> 1000;
+    <http://example.org/path> "/tmp/brol.ttl".
+

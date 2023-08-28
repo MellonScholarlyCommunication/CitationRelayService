@@ -1,0 +1,25 @@
+@prefix ex: <http://example.org/>.
+@prefix fno:  <https://w3id.org/function/ontology#> .
+@prefix pol:  <https://www.example.org/ns/policy#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+{
+    ex:a ex:b ex:c .
+}
+=>
+{
+    ex:MyUpdateStore pol:policy [
+        a fno:Execution ;
+        fno:executes ex:storeUpdate ;
+        ex:subject ex:x;
+        ex:predicate ex:y ;
+        ex:object ex:z
+    ] .
+
+    ex:MyWriteMainStore pol:policy [
+        a fno:Execution ;
+        sh:order 1000 ;
+        fno:executes ex:serializeAs ;
+        ex:path "/tmp/brol.ttl"
+    ] .
+} .
