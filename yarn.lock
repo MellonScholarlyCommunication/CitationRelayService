@@ -3475,10 +3475,10 @@ keygrip@~1.1.0:
   dependencies:
     tsscmp "1.0.6"
 
-koreografeye@0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/koreografeye/-/koreografeye-0.4.3.tgz#aabda6539267b1ecdfd12e3317c5a7c6319793cf"
-  integrity sha512-fpDorccs1PQRR8d9TjBI0ZdW8ahXDwIXdzcV7gq65k1Osz5glvY9hT9kF3OUZdUMRn7yyPF433jBNuDgVJncmg==
+koreografeye@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/koreografeye/-/koreografeye-0.4.5.tgz#66b8ce69f3259f80e25723fe7c1c88a47989279b"
+  integrity sha512-wIuin0WnNCwuPs+x2S+0yO5pg3fdrQ/v4BKjdFNqs4Wx4gQPlCVuwD/MDuPkwgTrXDidqGas1179kxrevCNhfw==
   dependencies:
     "@comunica/context-entries" "^2.8.2"
     "@comunica/query-sparql-rdfjs" "^2.5.1"
@@ -3710,6 +3710,13 @@ node-domexception@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
+
+node-fetch@2:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
+  integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 node-fetch@2.6.7:
   version "2.6.7"

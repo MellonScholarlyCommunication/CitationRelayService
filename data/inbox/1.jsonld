@@ -1,0 +1,35 @@
+{
+    "@context": [
+      "https://www.w3.org/ns/activitystreams",
+      "https://purl.org/coar/notify"
+    ],
+    "id": "urn:uuid:fa6b71d6-74b7-4334-b9d2-526cd1d9f9bb",
+    "type": [
+      "Announce",
+      "http://example.org/Citation"
+    ],
+    "actor": {
+      "id": "http://n071-20b.wall1.ilabt.iminds.be:3002/profile/card#me",
+      "type": "Service",
+      "inbox": "http://n071-20b.wall1.ilabt.iminds.be:3002/inbox/",
+      "name": "Citation Relay Service"
+    },
+    "context": {
+      "id": "https://signposting.org/1",
+      "inbox": "http://n071-20b.wall1.ilabt.iminds.be:3003/inbox/"
+    },
+    "object": {
+      "id": "http://n071-20b.wall1.ilabt.iminds.be:3001/results/1c241872-1dd1-4c14-b87d-0e2d6e64f81e.ttl",
+      "type": [
+        "Document",
+        "http://example.org/ServiceResult",
+        "http://example.org/ParsedCitationDocument"
+      ]
+    },
+    "origin": {
+      "id": "https://github.com/MellonScholarlyCommunication/CitationExtractorService/profile/card#me",
+      "type": "Service",
+      "name": "Mellon Citation Extractor Service Server"
+    }
+}
+  
